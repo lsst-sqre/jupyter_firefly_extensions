@@ -51,7 +51,7 @@ function openSlateMulti(app, id, activate) {
     activate= window.document.getElementById(id) || activate;
     if (!openWidgets[id]) {
         let widget = new SlateRootWidget(id);
-        app.shell.addToMainArea(widget);
+        app.shell.add(widget,'main');
         getFireflyAPI().then( (firefly) => {
             const {action}= firefly;
             action.dispatchChangeActivePlotView(undefined);
@@ -72,7 +72,7 @@ function openSlateMulti(app, id, activate) {
 function openSlateSingleOnly(app) {
     if (!widgetId) {
         let widget = new SlateRootWidget('slate-1');
-        app.shell.addToMainArea(widget);
+        app.shell.add(widgetm'main');
         widgetId= widget.id;
         getFireflyAPI().then( (firefly) => {
             const {action}= firefly;
