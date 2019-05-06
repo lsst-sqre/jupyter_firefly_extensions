@@ -72,7 +72,7 @@ function openSlateMulti(app, id, activate) {
 function openSlateSingleOnly(app) {
     if (!widgetId) {
         let widget = new SlateRootWidget('slate-1');
-        app.shell.add(widgetm'main');
+        app.shell.add(widget,'main');
         widgetId= widget.id;
         getFireflyAPI().then( (firefly) => {
             const {action}= firefly;
