@@ -2,7 +2,7 @@ import b64toBlob from 'b64-to-blob';
 import {addFirefly, buildURLErrorHtml} from './FireflyCommonUtils.js';
 import { Widget } from '@lumino/widgets';
 import { ABCWidgetFactory, DocumentRegistry, DocumentWidget, IDocumentWidget } from '@jupyterlab/docregistry';
-import { InstanceTracker} from '@jupyterlab/apputils';
+import { WidgetTracker} from '@jupyterlab/apputils';
 
 
 export const FITS_MIME_TYPE = 'application/fits';
@@ -47,7 +47,7 @@ export function activateFitsViewerExt(app, restorer) {
         readOnly: true
     });
     factory.createNewWidget= createNewFitsViewerDocumentWidget;
-    const tracker = new InstanceTracker({ namespace });
+    const tracker = new WidgetTracker({ namespace });
 
     // Handle state restoration.
     try {
