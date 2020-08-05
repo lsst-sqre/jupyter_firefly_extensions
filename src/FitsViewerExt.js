@@ -1,6 +1,6 @@
 import b64toBlob from 'b64-to-blob';
 import {addFirefly, buildURLErrorHtml} from './FireflyCommonUtils.js';
-import { Widget } from '@phosphor/widgets';
+import { Widget } from '@lumino/widgets';
 import { ABCWidgetFactory, DocumentRegistry, DocumentWidget, IDocumentWidget } from '@jupyterlab/docregistry';
 import { InstanceTracker} from '@jupyterlab/apputils';
 
