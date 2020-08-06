@@ -20,17 +20,21 @@ export const ServerConnectionModel = widgets.DOMWidgetModel.extend({
 export const ServerConnection = widgets.DOMWidgetView.extend({
 
     render() {
-        const modelUrl = this.model.get('url');
+	const modelUrl = this.model.get('url');
+	console.log("ServerConnection URL: " + modelUrl)
         this.usingLabExt= PageConfig && PageConfig.getOption('fireflyLabExtension');
+	console.log("Using Lab ext: " + this.usingLabExt)
         if (this.usingLabExt && PageConfig.getOption('fireflyURL')) {
             const fireflyLabURL= PageConfig.getOption('fireflyURL');
             if (modelUrl && fireflyLabURL !== modelUrl) this.showURLMismatch= true;
             this.connectedURL= fireflyLabURL;
+	    console.log("URL: " + fireflyLabURL + "URLMismatch? " + self.URLMismatch)
             addFirefly();
         }
         else {
             this.usingLabExt= false;
             this.connectedURL= modelUrl;
+	    console.log("Not using LabExt ; URL: " + modelUrl)
             window.getFireflyAPI= initFirefly(this.connectedURL);
         }
         this.redraw= this.redraw.bind(this);
