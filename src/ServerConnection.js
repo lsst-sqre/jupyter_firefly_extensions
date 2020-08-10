@@ -21,22 +21,18 @@ export const ServerConnection = widgets.DOMWidgetView.extend({
 
     render() {
 	const modelUrl = this.model.get('url');
-	console.log("ServerConnection URL: " + modelUrl)
-        this.usingLabExt= PageConfig && PageConfig.getOption('fireflyLabExtension');
-	console.log("Using Lab ext: " + this.usingLabExt)
-        if (this.usingLabExt && PageConfig.getOption('fireflyURL')) {
-            const fireflyLabURL= PageConfig.getOption('fireflyURL');
-            if (modelUrl && fireflyLabURL !== modelUrl) this.showURLMismatch= true;
-            this.connectedURL= fireflyLabURL;
-	    console.log("URL: " + fireflyLabURL + "URLMismatch? " + self.URLMismatch)
-            addFirefly();
-        }
-        else {
-            this.usingLabExt= false;
-            this.connectedURL= modelUrl;
-	    console.log("Not using LabExt ; URL: " + modelUrl)
-            window.getFireflyAPI= initFirefly(this.connectedURL);
-        }
+        console.log("ServerConnection URL: " + modelUrl);
+	// PageConfig doesn't work right in 2.x
+      
+        // this.usingLabExt= PageConfig && PageConfig.getOption('fireflyLabExtension');
+	// Just assume lab ext is true
+	this.usingLabExt = true;
+	console.log("Using Lab ext: " + this.usingLabExt);
+	// We need, at least in the 2.x world, to talk to a custom handler
+	//  to get the fireflyURL setting.
+	this.connectedURL= "/portal"; // FIXME need the magic here.
+	this.connectedURL= "https://lsst-demo.ncsa.illinois.edu/firefly"
+	addFirefly();
         this.redraw= this.redraw.bind(this);
         setTimeout(this.redraw, 0);
     },
