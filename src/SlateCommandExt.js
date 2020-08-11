@@ -19,7 +19,7 @@ var openWidgets= {};
  */
 export function activateSlateCommandExt(app) {
     const slateCmd= 'firefly:open slate';
-
+    console.log("activateSlateCommandExt: " + app)
                 // this is a hack could not get the command palette like the documention showed
     const palette= app._pluginMap["@jupyterlab/apputils-extension:palette"].service._palette;
     palette.addItem({command: slateCmd, category: 'Firefly'});
@@ -34,8 +34,9 @@ export function activateSlateCommandExt(app) {
         }
     });
 
-
+    console.log("About to call getFireflyApi...");
     getFireflyAPI().then( (firefly) => {
+	console.log("Made call; firefly: " + firefly);
         firefly.util.addActionListener(['StartLabWindow'], (action,state) => {
             openSlateMulti(app, action.payload.renderTreeId, false);
         });

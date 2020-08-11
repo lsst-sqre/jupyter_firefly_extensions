@@ -4,6 +4,7 @@ import { PageConfig} from '@jupyterlab/coreutils';
 
 
 export function addFirefly()  {
+    console.log("In addFirefly()");
     // This doesn't work in JL 2.x
     // if (!PageConfig && !PageConfig.getOption('fireflyLabExtension')) return;
     // const fireflyURL= PageConfig.getOption('fireflyURL') || 'http://localhost:8080/firefly';
@@ -13,8 +14,10 @@ export function addFirefly()  {
 
     window.firefly= Object.assign({}, window.firefly, {wsch:channel});
     if (!window.getFireflyAPI) {
+	console.log("window.getFireflyAPI calling initFirefly(" + fireflyURL + ").");
         window.getFireflyAPI= initFirefly(fireflyURL);
     }
+    console.log("addFirefly returning: "+ {fireflyURL, channel}+ ".");
     return {fireflyURL, channel};
 }
 
