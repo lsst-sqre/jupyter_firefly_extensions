@@ -4,9 +4,13 @@ import { PageConfig} from '@jupyterlab/coreutils';
 
 
 export function addFirefly()  {
-    if (!PageConfig && !PageConfig.getOption('fireflyLabExtension')) return;
-    const fireflyURL= PageConfig.getOption('fireflyURL') || 'http://localhost:8080/firefly';
-    const channel= PageConfig.getOption('fireflyChannel');
+    // This doesn't work in JL 2.x
+    // if (!PageConfig && !PageConfig.getOption('fireflyLabExtension')) return;
+    // const fireflyURL= PageConfig.getOption('fireflyURL') || 'http://localhost:8080/firefly';
+    // const channel= PageConfig.getOption('fireflyChannel');
+    const fireflyURL= "https://lsst-demo.ncsa.illinois.edu/firefly/";
+    const channel= 'florbledifloo';
+
     window.firefly= Object.assign({}, window.firefly, {wsch:channel});
     if (!window.getFireflyAPI) {
         window.getFireflyAPI= initFirefly(fireflyURL);
