@@ -1,6 +1,6 @@
 import {initFirefly} from 'firefly-api-access';
 import { PageConfig} from '@jupyterlab/coreutils';
-
+import {ServerConnection} from '@jupyterlab/services';
 
 
 export function addFirefly()  {
@@ -9,8 +9,18 @@ export function addFirefly()  {
     // if (!PageConfig && !PageConfig.getOption('fireflyLabExtension')) return;
     // const fireflyURL= PageConfig.getOption('fireflyURL') || 'http://localhost:8080/firefly';
     // const channel= PageConfig.getOption('fireflyChannel');
-    const fireflyURL= "https://lsst-demo.ncsa.illinois.edu/firefly/";
-    const channel= 'florbledifloo';
+    const baseURL = PageConfig.getOption('baseURL');
+    const fetch = ServerConnection.fetch;
+
+    let resp = await fetch(baseUrl + "rubin/settings")
+    if (response.ok) {
+	let settings = await response.json()
+    } else {
+	alert("Error: " + response.status);
+    }
+    console.log("Settings response: " + settings)
+    const fireflyURL = settings.firefly_url_lab;
+    const channel = settings.firefly_channel_lab;
 
     window.firefly= Object.assign({}, window.firefly, {wsch:channel});
     if (!window.getFireflyAPI) {
