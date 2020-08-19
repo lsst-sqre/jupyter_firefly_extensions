@@ -11,14 +11,16 @@ export function addFirefly()  {
     // const channel= PageConfig.getOption('fireflyChannel');
     const baseURL = PageConfig.getOption('baseURL');
     const fetch = ServerConnection.fetch;
-
-    let resp = await fetch(baseUrl + "rubin/settings")
-    if (response.ok) {
-	let settings = await response.json()
-    } else {
-	alert("Error: " + response.status);
-    }
-    console.log("Settings response: " + settings)
+    
+    let settings = ( async () => {
+	let response = await fetch(baseUrl + "rubin/settings");
+	if (response.ok) {
+	    let settings = await response.json();
+	} else {
+	    alert("Error: " + response.status);
+	}
+	console.log("Settings response: " + settings);
+    })();
     const fireflyURL = settings.firefly_url_lab;
     const channel = settings.firefly_channel_lab;
 
